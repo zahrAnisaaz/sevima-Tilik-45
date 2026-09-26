@@ -19,6 +19,11 @@ const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 50, standardHea
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', app: 'Tilik', tagline: 'Ajar Sesuai Tingkat' }));
 app.use('/api/auth', authLimiter, require('./routes/auth'));
+app.use('/api/meta', require('./routes/meta'));
+app.use('/api/classes', require('./routes/classes'));
+app.use('/api/students', require('./routes/students'));
+app.use('/api/assessments', require('./routes/assessments'));
+app.use('/api/activities', require('./routes/activities'));
 
 app.use('/api', notFound);
 app.use(errorHandler);
