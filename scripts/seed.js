@@ -113,5 +113,6 @@ async function main() {
 
 main().catch((err) => {
   console.error('❌ Seed gagal:', err.message || err);
+  if (/Invalid path/i.test(err.message || '')) console.error('   Periksa SUPABASE_URL di .env: harus persis https://xxxx.supabase.co');
   process.exit(1);
 });
