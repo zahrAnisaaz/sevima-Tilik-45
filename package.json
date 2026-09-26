@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "test": "node --test"
   },
   "engines": {
     "node": ">=18"
