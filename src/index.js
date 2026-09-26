@@ -24,6 +24,7 @@ app.use('/api/classes', require('./routes/classes'));
 app.use('/api/students', require('./routes/students'));
 app.use('/api/assessments', require('./routes/assessments'));
 app.use('/api/activities', require('./routes/activities'));
+app.use('/api/admin', require('./routes/admin'));
 
 app.use('/api', notFound);
 app.use(errorHandler);
