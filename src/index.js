@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -14,6 +15,7 @@ app.use(helmet({
 const origins = (process.env.CORS_ORIGIN || '').split(',').map((s) => s.trim()).filter(Boolean);
 app.use(cors({ origin: origins.length ? origins : '*' }));
 app.use(express.json({ limit: '100kb' }));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 50, standardHeaders: 'draft-7', legacyHeaders: false });
 
@@ -27,6 +29,8 @@ app.use('/api/activities', require('./routes/activities'));
 app.use('/api/admin', require('./routes/admin'));
 
 app.use('/api', notFound);
+// Semua rute non-API diarahkan ke aplikasi web (single page app)
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')));
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
